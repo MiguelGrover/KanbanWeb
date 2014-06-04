@@ -2,6 +2,8 @@
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.servlet.ServletException;
@@ -9,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import mg.proyecto.evolutivo.kanban.Program;
 import mg.proyecto.evolutivo.kanban.model.*;
 /**
  * Servlet implementation class AddTaskServlet
@@ -78,7 +81,9 @@ public class AddTaskServlet extends HttpServlet {
 					+ "<tr>"
 					+ "<td>Due date:</td>"
 					+ "<td>"
-					+ "<input type=\"text\"name=\"dueDate\"/>"
+					//+ "<input type=\"text\"name=\"dueDate\"/>"
+					+"<input type=\"text\" name=\"due_date\" value=\""
+					+ new Date() + "\"/>"
 					+ "</td>"
 					+ "</tr>"
 					
@@ -112,7 +117,6 @@ public class AddTaskServlet extends HttpServlet {
 		String owner = request.getParameter("owner");
 		String duedate = request.getParameter("dueDate");
 		String createdate = request.getParameter("createDate");
-		// Falta el state
 		String state = request.getParameter("state");
 		
 		response.setContentType("text/html");
@@ -138,7 +142,41 @@ public class AddTaskServlet extends HttpServlet {
 				
 				+ "</body>"
 				+ "</html>");
+		//Prueba
+		Task task = new Task();
+
+		task.setTitle(request.getParameter("title"));
+		task.setDescription(request.getParameter("description"));
+		task.setOwner(request.getParameter("owner"));
+		task.setCategory(new Category(request.getParameter("category")));
+
+		SimpleDateFormat formatter = new SimpleDateFormat(
+				"EEE MMM d HH:mm:ss zzz yyyy");
+		try {
+			task.setDueDate(formatter.parse(request.getParameter("due_date")));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		try {
+			task.setState(State.valueOf(request.getParameter("state")));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		try {
+			task.setPriority(Short.parseShort(request.getParameter("priority")));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		task.setCreateDate(new Date());
+
+		Program.dashboard.add(task);
+
+		response.setContentType("text/html");
+		PrintWriter writer2 = response.getWriter();
+		writer2.print("<html><body>" + task.toHtml() + "</body></html>");
 	}
+	
 	
 	
 	
