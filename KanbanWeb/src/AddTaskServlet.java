@@ -86,14 +86,7 @@ public class AddTaskServlet extends HttpServlet {
 					+ new Date() + "\"/>"
 					+ "</td>"
 					+ "</tr>"
-					
-					+ "<tr>"
-					+ "<td>Create Date:</td>"
-					+ "<td>"
-					+ "<input type=\"text\"name=\"createDate\"/>"
-					+ "</td>"
-					+ "</tr>"
-					
+										
 					+ "<tr>"
 					+ "<td>Add Task:</td>"
 					+ "<td>"
@@ -110,16 +103,16 @@ public class AddTaskServlet extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, 
 			HttpServletResponse response) throws ServletException, IOException {
-		String title = request.getParameter("title");
+		/*String title = request.getParameter("title");
 		String description = request.getParameter("description");
 		String category = request.getParameter("category");
 		String priority = request.getParameter("priority");
 		String owner = request.getParameter("owner");
 		String duedate = request.getParameter("dueDate");
 		String createdate = request.getParameter("createDate");
-		String state = request.getParameter("state");
+		String state = request.getParameter("state");*/
 		
-		response.setContentType("text/html");
+		/*response.setContentType("text/html");
 		PrintWriter writer = response.getWriter();
 		writer.print("<html>"
 				+ "<body>"
@@ -138,10 +131,9 @@ public class AddTaskServlet extends HttpServlet {
 				+"</BR>"
 				+"Due_date: "+duedate
 				+"</BR>"
-				+"Create_date: "+createdate
 				
 				+ "</body>"
-				+ "</html>");
+				+ "</html>");*/
 		//Prueba
 		Task task = new Task();
 
