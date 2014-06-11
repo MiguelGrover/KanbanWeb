@@ -33,7 +33,7 @@
     <description></description>
     <display-name>AddTaskServlet</display-name>
     <servlet-name>AddTaskServlet</servlet-name>
-    <servlet-class>AddTaskServlet</servlet-class>
+    <servlet-class>mg.kanbanweb.AddTaskServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>AddTaskServlet</servlet-name>

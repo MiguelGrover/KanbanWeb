@@ -4,41 +4,53 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Kanban Web</title>
+<%@ include file = "Copyright.jsp" %>
 </head>
 <body>
 <%-- Este es un comentario desde JSP --%>
 <!-- Este es un comentario desde HTML -->
 
-<% 
-	//String[] values = {"test", "test2", "test3"};
-	//for(String value : values)
-		//out.println("<div>"+value+"</div>");
-	//String test = request.getParameter("test");
-	//out.println(test);
-	//out.println("Hola mundo "+ new Date().toString());
-%>
 
-<%= "Hola mundo "+ new Date().toString() %>
-
-<%
-String[] values = {"test", "test2", "test3"};
-for(String value : values){
-%>
-
- <div> <%=value%> </div>
-<%
+<script >
+function validate(){
+	var title = document.forms["task_form"]["title"].value;
+	var description = document.forms["task_form"]["description"].value;
+	var category = document.forms["task_form"]["category"].value;
+	var priority = document.forms["task_form"]["priority"].value;
+	var owner = document.forms["task_form"]["owner"].value;
+	if(!title){
+		alert("Title empty!!!");
+		return false;
+	}
+	if(!description){
+		alert("Description empty!!!");
+		return false;
+	}
+	if(!category){
+		alert("Category empty!!!");
+		return false;
+	}
+	if(!priority){
+		alert("Priority empty!!!");
+		return false;
+	}
+	if(!owner){
+		alert("Owner empty!!!");
+		return false;
+	}
+	
+	return true;
 }
-%>
-<%@ include file = "Copyright.jsp" %>
-
-<form method="POST">
+</script>
+<Form name="task_form" method="POST" action="AddTaskServlet" 
+onsubmit="return validate()">
 					
 					<table>
 					
 					<tr>
 					<td>Title:</td>
 					<td>
-					<input type=\"text\"name="title">
+					<input type="text" name="title">
 					</td>
 					</tr>
 					
@@ -98,5 +110,7 @@ for(String value : values){
 					
 					</table>
 					</form>
+
+
 </body>
 </html>
